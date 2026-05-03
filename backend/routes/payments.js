@@ -4,10 +4,15 @@ const Razorpay = require('razorpay');
 const User = require('../models/User');
 const { protect } = require('../middleware/auth');
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
+let razorpay = null;
+if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
+  razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+  });
+} else {
+  console.log('⚠️ Razorpay keys missing. Payment features will be disabled.');
+}
 
 const PLAN_CREDITS = {
   basic: 200,
@@ -25,6 +30,10 @@ const PLAN_PRICES = {
 router.post('/create-order', protect, async (req, res) => {
   try {
     const { plan } = req.body;
+
+    if (!razorpay) {
+      return res.status(400).json({ error: 'Payments are not configured on this server.' });
+    }
 
     if (!PLAN_PRICES[plan]) {
       return res.status(400).json({ error: 'Invalid plan.' });
