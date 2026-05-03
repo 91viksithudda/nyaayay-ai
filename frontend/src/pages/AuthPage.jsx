@@ -184,6 +184,14 @@ export default function AuthPage({ mode = 'login' }) {
             {errors.password && <span className="form-error">{errors.password}</span>}
           </div>
 
+          {isLogin && (
+            <div style={{ textAlign: 'right', marginTop: -8 }}>
+              <Link to="/forgot-password" style={{ fontSize: 13, color: 'var(--gold-400)', textDecoration: 'none' }}>
+                Forgot password?
+              </Link>
+            </div>
+          )}
+
           <button
             id="auth-submit-btn"
             type="submit"
