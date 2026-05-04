@@ -17,12 +17,16 @@ import SettingsPage from './pages/SettingsPage';
 import AdminPage from './pages/AdminPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import LegalHelpline from './components/LegalHelpline';
+
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+
+
           {/* Public Routes */}
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<AuthPage mode="login" />} />
@@ -53,6 +57,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
+        <LegalHelpline />
         <Toaster
           position="top-right"
           toastOptions={{

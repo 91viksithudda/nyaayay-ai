@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   MessageSquare, FileText, Settings, Home, Star,
   Key, CreditCard, Shield, LogOut, Menu, X, ChevronRight,
-  BookOpen, Zap
+  BookOpen, Zap, Phone
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -168,7 +168,55 @@ export default function Sidebar({ mobileOpen, setMobileOpen }) {
           </div>
         )}
 
+        {/* Legal Helpline CTA */}
+        <div style={{ padding: '0 12px 12px' }}>
+          <motion.a
+            href="tel:15100"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              padding: '12px 14px',
+              background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.03))',
+              border: '1px solid rgba(239, 68, 68, 0.2)',
+              borderRadius: 12,
+              textDecoration: 'none',
+              transition: 'var(--transition)',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+          >
+            <div style={{
+              width: 32,
+              height: 32,
+              background: 'rgba(239, 68, 68, 0.15)',
+              borderRadius: 8,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#ef4444'
+            }}>
+              <Phone size={16} className="animate-pulse" />
+            </div>
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 800, color: '#ef4444', letterSpacing: 0.5, textTransform: 'uppercase' }}>Legal Helpline</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)' }}>Call 15100</div>
+            </div>
+            <div style={{
+              marginLeft: 'auto',
+              width: 6,
+              height: 6,
+              borderRadius: '50%',
+              background: '#10b981',
+              boxShadow: '0 0 8px #10b981'
+            }} />
+          </motion.a>
+        </div>
+
         {/* User Footer */}
+
         <div className="sidebar-footer">
           <div className="sidebar-user" onClick={logout}>
             <div className="sidebar-avatar">{initials}</div>
